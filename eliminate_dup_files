@@ -1,0 +1,45 @@
+import os
+import hashlib
+
+def bin_file_hash(file_name):
+# """Takes the file name, reads in binary and gives an hash value"""
+            a = hashlib.sha1()
+            f = open(file_name, 'rb')
+            a.update(f.read())
+            f.close()
+            return a.hexdigest()
+        
+def dup_file_detection(dir_name):
+# """find duplicate content files even if file name differs, by searching under all sub directories """
+   #Step 1: Obtain all files
+    all_files = []
+    for root, dirs, files in os.walk(dir_name):
+        for file in files:
+                all_files.append(os.path.join(root, file))
+
+    #Step 2: Hashing algorithm gets the unique value for the same content after reading the file content in binary mode
+    all_files_hashed = {k:bin_file_hash(k) for k in all_files}
+         
+    #Step 3: Flip the key/values to group the duplicates
+    dup_file_list = {}
+    for k, value in all_files_hashed.items():
+        if value not in dup_file_list:
+                dup_file_list[value] = [k]
+        else:
+                dup_file_list[value].append(k)
+    
+    #Step 4: Loop through to determine the duplicate file names (list comprehension)
+    dup_list_final = [v for k, v in dup_file_list.items() if len(dup_file_list[k]) > 1]
+    
+    return dup_list_final
+    
+dup_file_detection(os.getcwd())
+
+[['C:\\Users\\vgjer\\Desktop\\Data_roles\\algorithms',
+  'C:\\Users\\vgjer\\Desktop\\Data_roles\\algorithms - Copy'],
+['C:\\Users\\vgjer\\Desktop\\Data_roles\\test.txt - Copy.txt',
+  'C:\\Users\\vgjer\\Desktop\\Data_roles\\test.txt.txt'],
+['C:\\Users\\vgjer\\Desktop\\Data_roles\\Untitled.ipynb',
+  'C:\\Users\\vgjer\\Desktop\\Data_roles\\.ipynb_checkpoints\\Untitled-checkpoint.ipynb'],
+['C:\\Users\\vgjer\\Desktop\\Data_roles\\Sunday_School\\Music Schedule Dec 2017 - Copy.docx',
+  'C:\\Users\\vgjer\\Desktop\\Data_roles\\Sunday_School\\Music Schedule Dec 2017.docx']]
