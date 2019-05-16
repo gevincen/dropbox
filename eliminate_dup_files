@@ -34,12 +34,3 @@ def dup_file_detection(dir_name):
     return dup_list_final
     
 dup_file_detection(os.getcwd())
-
-[['C:\\Users\\vgjer\\Desktop\\Data_roles\\algorithms',
-  'C:\\Users\\vgjer\\Desktop\\Data_roles\\algorithms - Copy'],
-['C:\\Users\\vgjer\\Desktop\\Data_roles\\test.txt - Copy.txt',
-  'C:\\Users\\vgjer\\Desktop\\Data_roles\\test.txt.txt'],
-['C:\\Users\\vgjer\\Desktop\\Data_roles\\Untitled.ipynb',
-  'C:\\Users\\vgjer\\Desktop\\Data_roles\\.ipynb_checkpoints\\Untitled-checkpoint.ipynb'],
-['C:\\Users\\vgjer\\Desktop\\Data_roles\\Sunday_School\\Music Schedule Dec 2017 - Copy.docx',
-  'C:\\Users\\vgjer\\Desktop\\Data_roles\\Sunday_School\\Music Schedule Dec 2017.docx']]
